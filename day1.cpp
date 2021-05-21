@@ -9,6 +9,35 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+// Basic naive method
+void basic_method(int arr[], int n, int k) {
+  for (int i = 0; i < n - 1; i++) {
+    for (int j = i + 1; j < n; j++) {
+      if ((arr[i] + arr[j]) == k) {
+        cout << "True" << endl;
+        return;
+      }
+    }
+  }
+  cout << "False" << endl;
+  return;
+}
+
+// Doing in one pass
+void bonus(int arr[], int n, int k) {
+  unordered_set<int> s;
+  for (int i = 0; i < n; i++) {
+    int temp = k - arr[i];
+    if (s.find(temp) != s.end()) {
+      cout << "True" << endl;
+      return ;
+    }
+    s.insert(arr[i]);
+  }
+  cout << "False" << endl;
+  return ;
+} 
+
 int main() {
   int n, k;
   cout << "Enter size of array : ";
@@ -20,14 +49,10 @@ int main() {
   }
   cout << "Enter the required sum : ";
   cin >> k;
-  for (int i = 0; i < n - 1; i++) {
-    for (int j = i + 1; j < n; j++) {
-      if ((arr[i] + arr[j]) == k) {
-        cout << "True" << endl;
-        return 0;
-      }
-    }
-  }
-  cout << "False" << endl;
+
+  basic_method(arr, n, k);
+
+  bonus(arr, n, k);
+
   return 0;
 }
