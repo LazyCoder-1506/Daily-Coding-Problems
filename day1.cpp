@@ -23,7 +23,7 @@ void basic_method(int arr[], int n, int k) {
   return;
 }
 
-// Doing in one pass
+// Doing in one pass. Using hashmap because hashmap lookup happens in constant time
 void bonus(int arr[], int n, int k) {
   unordered_set<int> s;
   for (int i = 0; i < n; i++) {
