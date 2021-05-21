@@ -31,6 +31,7 @@ void naive(int arr[], int n) {
   return;
 }
 
+// creating a copy of array and adding at end, then multiplying n - 1 elements from element after a[i]
 void bonus_inefficient(int arr[], int n) {
   int new_arr[2 * n];
   for (int i = 0; i < 2 * n; i++) {
