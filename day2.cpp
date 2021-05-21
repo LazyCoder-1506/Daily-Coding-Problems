@@ -31,6 +31,27 @@ void naive(int arr[], int n) {
   return;
 }
 
+void bonus_inefficient(int arr[], int n) {
+  int new_arr[2 * n];
+  for (int i = 0; i < 2 * n; i++) {
+    new_arr[i] = arr[i % n];
+  }
+  long long int res[n];
+  for (int i = 0; i < n ;i++) {
+    long long prod = 1;
+    for (int j = 1; j < n; j++) {
+      prod = prod * new_arr[i + j];
+    }
+    res[i] = prod;
+  }
+  cout << "Output array : ";
+  for (int i = 0; i < n ;i++) {
+    cout << res[i] << " ";
+  }
+  cout << endl;
+  return;
+}
+
 int main() {
   int n;
   cout << "Enter size of array : ";
@@ -42,6 +63,8 @@ int main() {
   }
 
   naive(arr, n);
+
+  bonus_inefficient(arr, n);
 
   return 0;
 }
