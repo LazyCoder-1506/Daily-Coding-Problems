@@ -12,6 +12,7 @@
 
 #include <bits/stdc++.h>
 using namespace std;
+#define EPS 1e-9
 
 // basic method. Calculate total product and divide it with eavh element to get corresponding product
 void naive(int arr[], int n) {
@@ -53,6 +54,45 @@ void bonus_inefficient(int arr[], int n) {
   return;
 }
 
+// calculate prefix products and suffix products once. Then multiply corresponding prefix and suffix for each element
+void bonus_efficient(int arr[], int n) {
+  long long int product[n];
+  int temp = 1;
+  for (int i = 0; i < n ;i++) {
+    product[i] = temp;
+    temp = temp * arr[i];
+  }
+  temp = 1;
+  for (int i = n - 1; i >= 0 ;i--) {
+    product[i] = product[i] * temp;
+    temp = temp * arr[i];
+  }
+  cout << "Output array : ";
+  for (int i = 0; i < n ;i++) {
+    cout << product[i] << " ";
+  }
+  cout << endl;
+  return;
+}
+
+// use log properties to convert multiplication and division into addition and subtraction
+void op_solution(int arr[], int n) {
+  long double log_sum = 0;
+  for (int i = 0; i < n ; i++) {
+    log_sum = log_sum + (long double)log10(arr[i]);
+  }
+  long long int res[n];
+  for (int i = 0; i < n ;i++) {
+    res[i] = (long long int)(EPS + pow((long double)10.00, log_sum - (long double)log10(arr[i])));
+  }
+  cout << "Output array : ";
+  for (int i = 0; i < n ;i++) {
+    cout << res[i] << " ";
+  }
+  cout << endl;
+  return;
+}
+
 int main() {
   int n;
   cout << "Enter size of array : ";
@@ -66,6 +106,10 @@ int main() {
   naive(arr, n);
 
   bonus_inefficient(arr, n);
+
+  bonus_efficient(arr, n);
+
+  op_solution(arr, n);
 
   return 0;
 }
